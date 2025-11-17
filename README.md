@@ -1,53 +1,21 @@
-# Containers Starter
+# Cloudflare Containers + R2-backed FUSE mounts
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/cloudflare/templates/tree/main/containers-template)
+This is a demo app that 
 
-![Containers Template Preview](https://imagedelivery.net/_yJ02hpOMj_EnGvsU2aygw/5aba1fb7-b937-46fd-fa67-138221082200/public)
+1. A Worker as the front-end that proxies to a single container instance
+2. A container with an R2 bucket mounted using [tigrisfs](https://github.com/tigrisdata/tigrisfs) at `$HOME/mnt/r2/<bucket_name`>
+3. A Go application that uses `io/fs` to list files in the mounted R2 bucket and return them as JSON
 
-<!-- dash-content-start -->
+## Deploying it
 
-This is a [Container](https://developers.cloudflare.com/containers/) starter template.
+You'll need to provide your [R2 API credentials](https://developers.cloudflare.com/r2/api/tokens/) and Cloudflare account ID to the container.
 
-It demonstrates basic Container configuration, launching and routing to individual container, load balancing over multiple container, running basic hooks on container status changes.
+1. Update `wrangler.jsonc` with the `BUCKET_NAME` and `ACCOUNT_ID` environment variables. These are OK to be public.
+2. Use `npx wrangler@latest secret put AWS_ACCESS_KEY_ID` and `npx wrangler@latest secret put AWS_SECRET_ACCESS_KEY` to set your R2 credentials.
+3. Ensure Docker is running locally.
+4. `npx wrangler@latest deploy`
 
-<!-- dash-content-end -->
-
-Outside of this repo, you can start a new project with this template using [C3](https://developers.cloudflare.com/pages/get-started/c3/) (the `create-cloudflare` CLI):
-
-```bash
-npm create cloudflare@latest -- --template=cloudflare/templates/containers-template
-```
-
-## Getting Started
-
-First, run:
-
-```bash
-npm install
-# or
-yarn install
-# or
-pnpm install
-# or
-bun install
-```
-
-Then run the development server (using the package manager of your choice):
-
-```bash
-npm run dev
-```
-
-Open [http://localhost:8787](http://localhost:8787) with your browser to see the result.
-
-You can start editing your Worker by modifying `src/index.ts` and you can start
-editing your Container by editing the content of `container_src`.
-
-## Deploying To Production
-
-| Command          | Action                                |
-| :--------------- | :------------------------------------ |
-| `npm run deploy` | Deploy your application to Cloudflare |
+You can mount multiple buckets as you wish by updating the Dockerfile or doing it dynamically from within the application in your container. `tigrisfs` does not currently support scoping a mount to a specific prefix.
 
 ## Learn More
 
@@ -56,4 +24,6 @@ To learn more about Containers, take a look at the following resources:
 - [Container Documentation](https://developers.cloudflare.com/containers/) - learn about Containers
 - [Container Class](https://github.com/cloudflare/containers) - learn about the Container helper class
 
-Your feedback and contributions are welcome!
+## License
+
+Apache-2.0 licensed. Copyright 2025, Cloudflare, Inc.

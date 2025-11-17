@@ -2,35 +2,91 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
 	"os/signal"
+	"path/filepath"
 	"syscall"
 	"time"
 )
 
-func handler(w http.ResponseWriter, r *http.Request) {
-	message := os.Getenv("MESSAGE")
-	instanceId := os.Getenv("CLOUDFLARE_DURABLE_OBJECT_ID")
-	fmt.Fprintf(w, "Hi, I'm a container and this is my message: \"%s\", my instance ID is: %s", message, instanceId)
-
+type FileInfo struct {
+	Name  string `json:"name"`
+	IsDir bool   `json:"is_dir"`
+	Size  int64  `json:"size"`
 }
 
-func errorHandler(w http.ResponseWriter, r *http.Request) {
-	panic("This is a panic")
+type FileListResponse struct {
+	BucketName string     `json:"bucket_name"`
+	MountPath  string     `json:"mount_path"`
+	Files      []FileInfo `json:"files"`
+	Total      int        `json:"total"`
+}
+
+func listFilesHandler(w http.ResponseWriter, r *http.Request) {
+	bucketName := os.Getenv("BUCKET_NAME")
+	if bucketName == "" {
+		http.Error(w, "BUCKET_NAME environment variable not set", http.StatusInternalServerError)
+		return
+	}
+
+	home, err := os.UserHomeDir()
+	if err != nil {
+		http.Error(w, fmt.Sprintf("Failed to get home directory: %v", err), http.StatusInternalServerError)
+		return
+	}
+
+	mountPath := filepath.Join(home, "mnt", "r2", bucketName)
+
+	entries, err := os.ReadDir(mountPath)
+	if err != nil {
+		http.Error(w, fmt.Sprintf("Failed to read directory %s: %v", mountPath, err), http.StatusInternalServerError)
+		return
+	}
+
+	files := make([]FileInfo, 0, 10)
+	for i, entry := range entries {
+		if i >= 10 {
+			break
+		}
+
+		info, err := entry.Info()
+		if err != nil {
+			log.Printf("Warning: could not get info for %s: %v", entry.Name(), err)
+			continue
+		}
+
+		files = append(files, FileInfo{
+			Name:  entry.Name(),
+			IsDir: entry.IsDir(),
+			Size:  info.Size(),
+		})
+	}
+
+	response := FileListResponse{
+		BucketName: bucketName,
+		MountPath:  mountPath,
+		Files:      files,
+		Total:      len(entries),
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	if err := json.NewEncoder(w).Encode(response); err != nil {
+		log.Printf("Failed to encode JSON: %v", err)
+		http.Error(w, "Failed to encode response", http.StatusInternalServerError)
+		return
+	}
 }
 
 func main() {
-	// Listen for SIGINT and SIGTERM
 	stop := make(chan os.Signal, 1)
 	signal.Notify(stop, syscall.SIGINT, syscall.SIGTERM)
 
 	router := http.NewServeMux()
-	router.HandleFunc("/", handler)
-	router.HandleFunc("/container", handler)
-	router.HandleFunc("/error", errorHandler)
+	router.HandleFunc("/", listFilesHandler)
 
 	server := &http.Server{
 		Addr:    ":8080",
@@ -44,12 +100,9 @@ func main() {
 		}
 	}()
 
-	// Wait to receive a signal
 	sig := <-stop
-
 	log.Printf("Received signal (%s), shutting down server...", sig)
 
-	// Give the server 5 seconds to shutdown
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
