@@ -21,7 +21,7 @@ You'll need to provide your [R2 API credentials](https://developers.cloudflare.c
 
 You can mount multiple buckets as you wish by updating the Dockerfile or doing it dynamically from within the application in your container.
 
-To mount a bucket with a specific prefix, set `<bucket_name>:<prefix>` when passing it to `tigrisfs` - e.g. `/usr/local/bin/tigrisfs --endpoint "${R2_ENDPOINT}" -f "${BUCKET_NAME}" "$HOME/mnt/r2/${BUCKET_NAME}${PREFIX:+:${PREFIX}}"`
+To mount a bucket at a specific prefix, set the `R2_BUCKET_PREFIX` environment variable in `wrangler.json` or dynamically when creating a container instance.
 
 ## Learn More
 
