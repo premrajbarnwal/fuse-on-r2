@@ -27,6 +27,7 @@ To learn more about Containers, take a look at the following resources:
 
 - [Container Documentation](https://developers.cloudflare.com/containers/) - learn about Containers
 - [Container Class](https://github.com/cloudflare/containers) - learn about the Container helper class
+- Learn more about Container [lifecycles](https://developers.cloudflare.com/containers/platform-details/architecture/)
 
 ## License
 
