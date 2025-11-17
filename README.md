@@ -1,10 +1,14 @@
 # Cloudflare Containers + R2-backed FUSE mounts
 
-This is a demo app that 
+This is a demo app that shows how to mount an R2 bucket into a Cloudflare Container!
 
 1. A Worker as the front-end that proxies to a single container instance
 2. A container with an R2 bucket mounted using [tigrisfs](https://github.com/tigrisdata/tigrisfs) at `$HOME/mnt/r2/<bucket_name`>
 3. A Go application that uses `io/fs` to list files in the mounted R2 bucket and return them as JSON
+
+Mounting object storage buckets as FUSE mounts allows applications to interact with the bucket as if it were a local filesystem: useful if you have apps that don't have native support for object storage (many!) and/or want to simplify operations.
+
+The trade-off is that object storage is not exactly a POSIX compatible filesystem, nor is it local, and so you should not expect native, SSD-like performance. For many apps, this doesn't matter: reading a bunch of shared assets, bootstrapping a agent/sandbox, or providing a way to persist user-state are all common use cases and rarely I/O intensive.
 
 ## Deploying it
 
