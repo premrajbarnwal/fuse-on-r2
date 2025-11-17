@@ -10,6 +10,10 @@
   "compatibility_flags": ["nodejs_compat"],
   "observability": {
     "enabled": true,
+    "traces": {
+      "enabled": true,
+      "head_sampling_rate": 0.1,
+    },
   },
   "vars": {
     // Make sure to provide your AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY as secrets
