@@ -13,7 +13,6 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o /server
 
 FROM alpine:3.20
 
-# Install ca-certificates first to fix SSL verification, then install other packages
 RUN apk update && \
     apk add --no-cache ca-certificates && \
     apk add --no-cache fuse fuse-dev curl bash
